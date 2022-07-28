@@ -14,7 +14,7 @@ const limiter = rateLimit({
 });
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const routes = require('./routes');
+const routes = require('./routes/index');
 
 app.listen(PORT, () => {
   console.log(`App listening on PORT ${PORT}`);

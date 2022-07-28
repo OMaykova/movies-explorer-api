@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const User = require('../models/user');
 
 const SALT_ROUND = 10;
+const { generateToken } = require('../helpers/jwt');
 
 module.exports.getProfileUser = (req, res, next) => {
   User.findById(req.user._id)
@@ -57,4 +58,29 @@ module.exports.createUser = (req, res, next) => {
   } else {
     throw new BadRequestError('Некорректно указан Email');
   }
+};
+module.exports.login = (req, res, next) => {
+  if (validator.isEmail(req.body.email)) {
+    const { email, password } = req.body;
+    return User.findUserByCredentials(email, password)
+      .then((user) => {
+        const token = generateToken({ _id: user._id });
+        res.cookie('jwt', token, {
+          maxAge: 3600000 * 24 * 7, // срок куки 7 дней
+          httpOnly: true,
+          sameSite: 'none',
+          secure: 'true',
+        });
+        res.send({ message: 'Проверка прошла успешно!' });
+      })
+      .catch(() => {
+        throw new AuthorizationError(AuthorizationError.message);
+      })
+      .catch(next);
+  }
+  throw new BadRequestError('Некорректно указан Email');
+};
+
+module.exports.signout = (req, res) => {
+  res.status(200).clearCookie('jwt').send({ message: 'Cookie удален' });
 };
