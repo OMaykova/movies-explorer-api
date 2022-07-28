@@ -1,4 +1,6 @@
 const Movie = require('../models/movie');
+const BadRequestError = require('../errors/bad-request-err');
+const NotFoundError = require('../errors/not-found-err');
 
 module.exports.getMovie = (req, res, next) => {
   Movie.find({ owner: req.user._id })
@@ -27,7 +29,7 @@ module.exports.createMovie = (req, res, next) => {
     .then((movie) => res.status(200).send(movie))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        throw new BadRequestError('Переданы некорректные данные при создании карточки');
+        throw new BadRequestError('Переданы некорректные данные при создании фильма');
       } else {
         next(err);
       }

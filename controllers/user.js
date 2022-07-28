@@ -4,6 +4,10 @@ const User = require('../models/user');
 
 const SALT_ROUND = 10;
 const { generateToken } = require('../helpers/jwt');
+const BadRequestError = require('../errors/bad-request-err');
+const NotFoundError = require('../errors/not-found-err');
+const MongoDuplicateError = require('../errors/mongo-duplicate-err');
+const AuthorizationError = require('../errors/auth-err');
 
 module.exports.getProfileUser = (req, res, next) => {
   User.findById(req.user._id)
