@@ -19,6 +19,7 @@ const { errors } = require('celebrate');
 const routes = require('./routes');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const centralizedErrorHandler = require('./middlewares/centralizedErrorHandler');
+const { MONGO_URL } = require('./config');
 
 const allowedCors = {
   origin: [
@@ -35,7 +36,7 @@ const allowedCors = {
 app.listen(PORT, () => {
   console.log(`App listening on PORT ${PORT}`);
 });
-mongoose.connect('mongodb://localhost:27017/moviesdb', {
+mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }, (err) => {
