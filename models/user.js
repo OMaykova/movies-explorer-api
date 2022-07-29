@@ -4,12 +4,11 @@ const bcrypt = require('bcrypt');
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
-    required: true,
+    required: [true, 'Введите адрес электронной почты'],
     unique: true,
     validate: {
       validator(v) {
-        const email = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/;
-        return email.test(v);
+        return /^[\w-.]+@[\w-]+\.[a-z]{2,4}$/i.test(v);
       },
       message: 'Неправильный формат электронной почты',
     },
