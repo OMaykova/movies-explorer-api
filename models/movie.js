@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const regexURL = require('../utils/constants');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -24,17 +25,17 @@ const movieSchema = new mongoose.Schema({
   image: {
     type: String,
     required: true,
-    match: [/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/, 'Некорректно введен URL'],
+    match: [regexURL, 'Некорректно введен URL'],
   },
   trailerLink: {
     type: String,
     required: true,
-    match: [/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/, 'Некорректно введен URL'],
+    match: [regexURL, 'Некорректно введен URL'],
   },
   thumbnail: {
     type: String,
     required: true,
-    match: [/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/, 'Некорректно введен URL'],
+    match: [regexURL, 'Некорректно введен URL'],
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,

@@ -10,23 +10,23 @@ module.exports.getMovie = (req, res, next) => {
     .catch(next);
 };
 module.exports.createMovie = (req, res, next) => {
-  const {
-    country, director, duration, year, description,
-    image, trailerLink, nameRU, nameEN, id,
-  } = req.body;
-  Movie.create({
-    country,
-    director,
-    duration,
-    year,
-    description,
-    image: image.url,
-    trailer: trailerLink,
-    nameRU,
-    nameEN,
-    thumbnail: image.formats.thumbnail.url,
-    movieId: id,
-  })
+  const owner = req.user._id;
+  const movieData = req.body;
+  Movie.create({ ...movieData, owner })
+    // {
+    // country,
+    // director,
+    // duration,
+    // year,
+    // description,
+    // image: image.url,
+    // trailerLink,
+    // nameRU,
+    // nameEN,
+    // thumbnail: image.formats.thumbnail.url,
+    // movieId: id,
+    // owner,
+  // }
     .then((movie) => res.status(200).send(movie))
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -41,7 +41,7 @@ module.exports.deleteMovie = (req, res, next) => {
   Movie.findById(req.params._id)
     .orFail(new NotFoundError('Фильм с указанным _id не найден'))
     .then((movie) => {
-      if (req.user._id !== movie.owner.toString()) {
+      if (req.user._id.toString() !== movie.owner.toString()) {
         throw new ForbiddenError(ForbiddenError.message);
       }
       Movie.deleteOne({ movie })
