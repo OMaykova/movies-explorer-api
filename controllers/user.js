@@ -27,7 +27,11 @@ module.exports.updateUser = (req, res, next) => {
       res.status(200).send(user);
     })
     .catch((err) => {
+      if (err.code === 11000) {
+        throw new MongoDuplicateError(MongoDuplicateError.message);
+      }
       if (err.name === 'ValidationError') {
+        console.log(err);
         throw new BadRequestError('Переданы некорректные данные при создании пользователя');
       } else {
         next(err);
@@ -78,7 +82,7 @@ module.exports.login = (req, res, next) => {
         res.send({ message: 'Проверка прошла успешно!' });
       })
       .catch(() => {
-        throw new AuthorizationError(AuthorizationError.message);
+        throw new AuthorizationError('Неправильная почта или пароль');
       })
       .catch(next);
   }

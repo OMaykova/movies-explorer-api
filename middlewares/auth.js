@@ -5,7 +5,7 @@ const AuthorizationError = require('../errors/auth-err');
 module.exports = (req, res, next) => {
   const token = req.cookies.jwt;
   if (!token) {
-    throw new AuthorizationError(AuthorizationError.message);
+    throw new AuthorizationError('Необходима авторизация');
   }
   let payload;
   try {
@@ -13,13 +13,13 @@ module.exports = (req, res, next) => {
     User.findOne({ _id: payload._id })
       .then((user) => {
         if (!user) {
-          throw new AuthorizationError(AuthorizationError.message);
+          throw new AuthorizationError('Необходима авторизация');
         }
         req.user = { _id: user._id };
         next();
       })
       .catch(next);
   } catch (err) {
-    next(new AuthorizationError(AuthorizationError.message));
+    next(new AuthorizationError('Необходима авторизация'));
   }
 };
