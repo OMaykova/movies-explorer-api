@@ -15,7 +15,7 @@ module.exports.validationMovieBody = celebrate({
       }
       return helpers.message('Ссылка указана некорректно!');
     }),
-    trailer: Joi.string().required().custom((value, helpers) => {
+    trailerLink: Joi.string().required().custom((value, helpers) => {
       if (validator.isURL(value)) {
         return value;
       }
