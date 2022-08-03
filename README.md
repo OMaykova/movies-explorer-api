@@ -4,6 +4,7 @@
 В данном проекте реализован API для аутентификации пользователей и сохранения фильмов.
 Сервис поиска фильмов по ключевым словам используется сторонний - MoviesExplorer.
 
+Домен сервера: [https://api.filmoteka.nomoredomains.xyz](https://api.filmoteka.nomoredomains.xyz)
 ## Технологии
 * Express
 * Mongoose
