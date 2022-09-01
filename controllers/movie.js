@@ -1,11 +1,11 @@
 const Movie = require('../models/movie');
 const BadRequestError = require('../errors/bad-request-err');
-const NotFoundError = require('../errors/not-found-err');
+// const NotFoundError = require('../errors/not-found-err');
 const ForbiddenError = require('../errors/forbidden-err');
 
 module.exports.getMovie = (req, res, next) => {
   Movie.find({ owner: req.user._id })
-    .orFail(new NotFoundError('Сохраненных пользователем фильмов нет'))
+    // .orFail(new NotFoundError('Сохраненных пользователем фильмов нет'))
     .then((movies) => res.status(200).send(movies))
     .catch(next);
 };
@@ -39,7 +39,7 @@ module.exports.createMovie = (req, res, next) => {
 };
 module.exports.deleteMovie = (req, res, next) => {
   Movie.findById(req.params._id)
-    .orFail(new NotFoundError('Фильм с указанным _id не найден'))
+    // .orFail(new NotFoundError('Фильм с указанным _id не найден'))
     .then((movie) => {
       if (req.user._id.toString() !== movie.owner.toString()) {
         throw new ForbiddenError(ForbiddenError.message);
