@@ -1,24 +1,24 @@
-# Дипломный проект 'Фильмотека' - backend
+# Diploma project 'Filmoteka' - backend
 
-'Фильмотека' - сервис, в котором можно найти фильмы по запросу и сохранить в личном кабинете.
-В данном проекте реализован API для аутентификации пользователей и сохранения фильмов.
-Сервис поиска фильмов по ключевым словам используется сторонний - MoviesExplorer.
+Filmoteka is a service where you can find movies on demand and save them in your personal account.
+This project implements an API for authenticating users and saving movies.
+The service for searching movies by keywords is used by a third-party - Movies Explorer.
 
-Домен сервера: [https://api.filmoteka.nomoredomains.xyz](https://api.filmoteka.nomoredomains.xyz)
-## Технологии
+Server domain: [https://api.filmoteka.nomoredomains.xyz ](https://api.filmoteka.nomoredomains.xyz )
+## Technologies
 * Express
 * Mongoose
 * Bcrypt
 * Nodemon
 
-## Директории
-`/routes` — папка с файлами роутера  
-`/controllers` — папка с файлами контроллеров пользователя и карточки   
-`/models` — папка с файлами описания схем пользователя и карточки  
-  
-Остальные директории вспомогательные, создаются при необходимости разработчиком
+## Directories
+`/routes' — folder with router files
+`/controllers' — folder with the files of the user's controllers and the card
+`/models' — folder with files describing the user's schemes and cards
 
-## Запуск проекта
+The remaining directories are auxiliary, created if necessary by the developer
 
-`npm run start` — запускает сервер   
-`npm run dev` — запускает сервер с hot-reload
+## Project launch
+
+`npm run start' — starts the server
+`npm run dev' — starts the server with hot-reload
