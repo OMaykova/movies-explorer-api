@@ -1,4 +1,4 @@
-# Diploma project 'Filmoteka' - backend
+# 'Filmoteka' - backend
 
 Filmoteka is a service where you can find movies on demand and save them in your personal account.
 This project implements an API for authenticating users and saving movies.
