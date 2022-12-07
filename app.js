@@ -29,6 +29,7 @@ const allowedCors = {
     'http://filmoteka.nomoredomains.xyz',
     'http://localhost:3000',
     'http://localhost:3001',
+    'https://localhost:3001',
     'https://omaykova.github.io',
   ],
   credentials: true, // эта опция позволяет устанавливать куки
